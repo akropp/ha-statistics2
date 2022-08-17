@@ -1,0 +1,7 @@
+{
+    "name": "Statistics2",
+    "hacs": "1.6.0",
+    "homeassistant": "2021.9.0",
+    "zip_release": true,
+    "filename": "statistics2.zip"
+  }
