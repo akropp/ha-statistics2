@@ -229,7 +229,7 @@ _PLATFORM_SCHEMA_BASE = PLATFORM_SCHEMA.extend(
         vol.Optional(CONF_QUANTILE_METHOD, default=DEFAULT_QUANTILE_METHOD): vol.In(
             ["exclusive", "inclusive"]
         ),
-        vol.Optional(CONF_PIN_OLDEST): cv.bool,
+        vol.Optional(CONF_PIN_OLDEST): cv.boolean,
     }
 )
 PLATFORM_SCHEMA = vol.All(
