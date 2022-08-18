@@ -616,6 +616,8 @@ class StatisticsSensor(SensorEntity):
                 )
             age_range_seconds = (self.ages[-1] - self.ages[0]).total_seconds()
             return area / age_range_seconds
+        elif len(self.states) == 1 and self._pin_oldest:
+            return self.states[0] # assume constant for the entire time
         return None
 
     def _stat_average_step(self) -> StateType:
@@ -628,6 +630,8 @@ class StatisticsSensor(SensorEntity):
                 )
             age_range_seconds = (self.ages[-1] - self.ages[0]).total_seconds()
             return area / age_range_seconds
+        elif len(self.states) == 1 and self._pin_oldest:
+            return self.states[0]
         return None
 
     def _stat_average_timeless(self) -> StateType:
@@ -760,6 +764,8 @@ class StatisticsSensor(SensorEntity):
                     on_seconds += (self.ages[i] - self.ages[i - 1]).total_seconds()
             age_range_seconds = (self.ages[-1] - self.ages[0]).total_seconds()
             return 100 / age_range_seconds * on_seconds
+        elif len(self.states) == 1 and self._pin_oldest:
+            return self.states[0]
         return None
 
     def _stat_binary_average_timeless(self) -> StateType:
