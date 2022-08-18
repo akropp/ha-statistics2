@@ -477,7 +477,7 @@ class StatisticsSensor(SensorEntity):
         
         if self._pin_oldest:
             newval, newage = self._pin_oldest_fn(lastval, lastage, now - max_age)
-            if newage is not None:
+            if newage is not None and newval is not None:
                 self.ages.insert(0, newage)
                 self.states.insert(0, newval)
 
