@@ -488,7 +488,11 @@ class StatisticsSensor(SensorEntity):
             # Take the oldest entry from the ages list and add the configured max_age.
             # If executed after purging old states, the result is the next timestamp
             # in the future when the oldest state will expire.
-            return self.ages[0] + self._samples_max_age
+            next = self.ages[0] + self._samples_max_age
+            if self._pin_oldest and self.ages[0] == dt_util.utcnow() - self._samples_max_age:
+                return self.ages[1] + self._samples_max_age if len(self.ages) > 1 else None
+            else:
+                return next
         return None
 
     async def async_update(self) -> None:
@@ -618,7 +622,7 @@ class StatisticsSensor(SensorEntity):
             return area / age_range_seconds
         elif len(self.states) == 1 and self._pin_oldest:
             return self.states[0] # assume constant for the entire time
-        return None
+        return None 
 
     def _stat_average_step(self) -> StateType:
         if len(self.states) >= 2:
